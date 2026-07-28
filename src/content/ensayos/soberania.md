@@ -1,0 +1,40 @@
+---
+titulo: "De lo soberano, de lo subyacente, de lo desigual"
+descripcion: "Una exploración de la relación entre soberanía, subordinación y desigualdad social."
+fecha: 2026-07-28
+autor: "Vicente Domínguez Arca"
+conceptos:
+  - "Soberanía"
+  - "Desigualdad"
+  - "Poder"
+destacado: false
+borrador: false
+---
+
+Hay una dialéctica que me resulta especialmente fértil, tanto como escasamente explorada de manera meticulosa. Etimológicamente hablando, *soberano* es una locución de origen latino que, tras una trayectoria filológica ciertamente curiosa, remite, en su raíz, a "aquello que está por encima". *Subyacente*, en cierto modo como contrapartida, hace referencia a "aquello que yace debajo". No tengo intención de convertir esta nota en un repaso histórico de diferentes teorías filosóficas; pediré simplemente al lector que recuerde, o traiga al presente, algunos pasajes de los autores que iré mencionando.
+
+Aunque no de un modo explícito, este juego entre lo soberano y lo subyacente ha sido explorado tácitamente por distintos filósofos. En Rousseau, y en la figura del hombre natural ---posteriormente simplificada bajo la conocida expresión de "buen salvaje"---, lo soberano, o la condición soberana, la soberanía, es un fenómeno que únicamente puede interpretarse en el plano social, con las cualidades de inalienabilidad e indivisibilidad que el propio autor le atribuye. En *El contrato social*, la soberanía reside en el pueblo.
+
+¿Y la subyacencia? No aparece directamente, pero sí entre líneas. Para Rousseau, el hombre natural es radicalmente piadoso y está movido por el amor de sí. Eso es, precisamente, lo que subyace a la soberanía. En Rousseau, la soberanía reside en el pueblo porque descansa sobre un ser humano naturalmente piadoso y dotado de amor de sí. Son esas propiedades individuales las que sientan la base de la soberanía; podría decirse que ésta descansa sobre ellas. Comienza así a dibujarse una suerte de dialéctica entre lo soberano y lo subyacente.
+
+Pero veamos más.
+
+En Hobbes encontramos, quizá, el caso contrario. La soberanía, afirma, reside en el Estado, una estructura que gobierna y garantiza el orden. La explicación del autor, dicho muy a grandes rasgos, consiste en que la libertad únicamente puede preservarse en la medida en que exista un poder soberano capaz de protegerla. Loable la intención, sin duda. Sin embargo, cuando exploramos la dialéctica con la subyacencia encontramos el miedo de las personas y su natural deseo de conservación. Curiosamente, son precisamente esos fenómenos subyacentes los que alimentan la soberanía residente en el Estado.
+
+Pero podemos encontrar aún más.
+
+En Nietzsche aparece la genialidad de situar la soberanía en la persona individual. No como una apertura al libertinaje, ni mucho menos, sino como el comienzo de un camino de autodominio capaz de conducir a la plena realización del individuo y, desde ahí, a una sociedad auténticamente plural y libre. No resulta difícil advertir cómo esta idea anticipa el horizonte desde el que Nietzsche pensará posteriormente la figura del superhombre. Pero incluso el genio de Nietzsche necesita de una subyacencia: apela a la fuerza vital, al instinto y a la voluntad de poder. Todo ello subyace a la soberanía del individuo.
+
+Para no aturdir al lector, y tampoco al que escribe esta nota, cerraré esta breve recapitulación con otro genio: Marx.
+
+Podría decirse, simplificando deliberadamente, que en la sociedad burguesa la soberanía efectiva reside en la burguesía. Quizá un lector crítico considere esta afirmación excesivamente simple; no seré yo quien le lleve la contraria. Pero, para lo que necesito aquí del gran Marx, esa simplificación resulta suficiente. Lo verdaderamente interesante aparece cuando buscamos aquello que subyace a esa soberanía. Sin demasiadas dilaciones, encontramos la producción y, por tanto, a quien la sostiene: la clase trabajadora. De este modo, la dialéctica presenta una burguesía soberana cuya posición descansa materialmente sobre el trabajo de quienes producen. Más adelante, el propio materialismo histórico convertirá esa tensión en la conocida lucha de clases.
+
+Pareciera, así, que identificamos una dialéctica bastante evidente entre lo soberano y lo subyacente, y pareciera igualmente que aquello que subyace cumple fielmente su papel de soporte. Es una dialéctica en el sentido de que parece difícil concebir lo soberano sin aquello que lo sostiene, del mismo modo que lo subyacente sólo adquiere esa condición en relación con una soberanía determinada.
+
+Sin embargo, aprovechando las lecturas a las que hemos recurrido aquí, creo que existe un matiz especialmente relevante. En lo soberano hay siempre un poder sobre aquello que "tiene debajo", mientras que lo subyacente, aun siendo fielmente su fundamento, no sólo proporciona el sustento de la soberanía, sino que soporta también su carga. En esa relación aparece una clara verticalidad, un gradiente de desigualdad intrínsecamente marcado.
+
+No se trata aquí de justificar o no la abolición de las soberanías nominales; tampoco de hacer apología de la soberanía popular. Se trata, simplemente, de presentar esta dialéctica y dejar que sea, quizá, el lector quien trate de responder a una pregunta que considero especialmente sugerente: ¿existe algún modo de mitigar el gradiente de desigualdad descrito en ella? Dicho de otro modo, ¿es posible eliminar esa dialéctica?
+
+Yo opino que sí.
+
+Y, en algún momento, trataré de argumentarlo.
