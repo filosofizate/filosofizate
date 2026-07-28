@@ -21,7 +21,7 @@ No sucede lo mismo con el futuro. El futuro todavía no ha ocurrido. Permanece c
 
 No pretendo presentar estas afirmaciones como axiomas ni sostener que constituyan una descripción definitiva de la realidad. Sin embargo, si el lector concede provisionalmente su plausibilidad, se abre entonces un debate extraordinariamente sugerente. A la luz de este marco, ¿qué es, si es que es algo, la propiedad privada?
 
-# Lo propio y la continuidad temporal {#lo-propio-y-la-continuidad-temporal .unnumbered}
+# Lo propio y la continuidad temporal
 
 Lo propio es un concepto que ha ocupado a generaciones enteras de pensadores. Si aceptamos provisionalmente el marco anterior, podría sostenerse que lo común corresponde al propio tejido compartido del pasado: las interacciones acontecidas, los hechos vividos colectivamente y las consecuencias que de ellos se derivan.
 
@@ -35,7 +35,7 @@ Bajo esta perspectiva, cualquier vínculo de apropiación que pretenda extenders
 
 Así, aquello que inicialmente se presenta como un mecanismo de orden vital termina configurándose como una estructura que delimita las posibilidades de acción dentro del Huniverso compartido.
 
-# La propiedad como estructura transgeneracional {#la-propiedad-como-estructura-transgeneracional .unnumbered}
+# La propiedad como estructura transgeneracional
 
 A esta consideración debe añadirse otra de gran relevancia.
 
@@ -53,7 +53,7 @@ Todo parece indicar que la propiedad atraviesa efectivamente esa dinámica tempo
 
 Como seres humanos inmersos en el Huniverso, resulta difícil sostener que podamos ejercer un dominio absoluto sobre realidades que ni siquiera somos capaces de percibir en su totalidad. Nuestra experiencia es necesariamente parcial, situada y limitada.
 
-# La propiedad como usufructo prolongado {#la-propiedad-como-usufructo-prolongado .unnumbered}
+# La propiedad como usufructo prolongado
 
 Quizás el problema resida precisamente en la manera en que nombramos las cosas.
 
