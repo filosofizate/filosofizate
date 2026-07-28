@@ -1,0 +1,45 @@
+---
+import {
+  getCollection,
+  render,
+  type CollectionEntry,
+} from "astro:content";
+
+import EnsayoLayout from "../../layouts/EnsayoLayout.astro";
+
+export async function getStaticPaths() {
+  const todosLosEnsayos = await getCollection("ensayos");
+
+  const ensayosPublicados = todosLosEnsayos.filter(
+    (ensayo: CollectionEntry<"ensayos">) => !ensayo.data.borrador,
+  );
+
+  return ensayosPublicados.map(
+    (ensayo: CollectionEntry<"ensayos">) => ({
+      params: {
+        id: ensayo.id,
+      },
+      props: {
+        ensayo,
+      },
+    }),
+  );
+}
+
+interface Props {
+  ensayo: CollectionEntry<"ensayos">;
+}
+
+const { ensayo } = Astro.props as Props;
+const { Content } = await render(ensayo);
+---
+
+<EnsayoLayout
+  titulo={ensayo.data.titulo}
+  descripcion={ensayo.data.descripcion}
+  fecha={ensayo.data.fecha}
+  autor={ensayo.data.autor}
+  conceptos={ensayo.data.conceptos}
+>
+  <Content />
+</EnsayoLayout>
