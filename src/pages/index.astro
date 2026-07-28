@@ -1,0 +1,374 @@
+---
+const ensayos = [
+  {
+    titulo: "De la deuda, de la reciprocidad y de sus tensiones",
+    descripcion:
+      "Una exploración de la deuda como relación de justicia, poder y asimetría.",
+    temas: ["Deuda", "Reciprocidad", "Justicia"],
+  },
+  {
+    titulo: "Del colapso de la información",
+    descripcion:
+      "Una reflexión sobre la aceleración informativa y los límites humanos para procesarla.",
+    temas: ["Información", "Tecnología", "Sociedad"],
+  },
+  {
+    titulo: "De lo aparentemente inevitable: la propiedad",
+    descripcion:
+      "Una reconsideración de la propiedad como relación temporal y usufructo prolongado.",
+    temas: ["Propiedad", "Tiempo", "Lo común"],
+  },
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="description"
+      content="FilosofíZate: filosofía en construcción para pensar el presente."
+    />
+    <title>FilosofíZate</title>
+  </head>
+
+  <body>
+    <header class="cabecera">
+      <a class="marca" href="/">FilosofíZate</a>
+
+      <nav aria-label="Navegación principal">
+        <a href="#ensayos">Ensayos</a>
+        <a href="#conceptos">Conceptos</a>
+        <a href="#proyecto">Proyecto</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="presentacion">
+        <p class="etiqueta">Filosofía en construcción</p>
+
+        <h1>Pensar de nuevo los conceptos con los que vivimos.</h1>
+
+        <p class="introduccion">
+          Un espacio abierto para explorar la deuda, la confianza, la
+          propiedad, la soberanía, la información y las formas de lo común.
+        </p>
+
+        <a class="boton" href="#ensayos">Leer los ensayos</a>
+      </section>
+
+      <section class="seccion" id="ensayos">
+        <div class="titulo-seccion">
+          <p class="etiqueta">Publicaciones</p>
+          <h2>Ensayos recientes</h2>
+        </div>
+
+        <div class="rejilla">
+          {
+            ensayos.map((ensayo) => (
+              <article class="tarjeta">
+                <div class="temas">
+                  {ensayo.temas.map((tema) => <span>{tema}</span>)}
+                </div>
+
+                <h3>{ensayo.titulo}</h3>
+                <p>{ensayo.descripcion}</p>
+                <a href="#">Próximamente →</a>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+
+      <section class="seccion manifiesto" id="conceptos">
+        <p class="etiqueta">Mapa conceptual</p>
+        <h2>Una investigación articulada, no una colección de opiniones.</h2>
+
+        <p>
+          Cada ensayo examina un concepto particular, pero todos participan
+          de una misma investigación sobre la interdependencia social y las
+          estructuras que organizan nuestra vida común.
+        </p>
+      </section>
+
+      <section class="seccion proyecto" id="proyecto">
+        <p class="etiqueta">El proyecto</p>
+        <h2>Una obra filosófica abierta a la crítica.</h2>
+
+        <p>
+          FilosofíZate acompaña el desarrollo de una investigación doctoral y
+          busca convertir a sus lectores en interlocutores: personas capaces
+          de objetar, ampliar, relacionar y continuar sus argumentos.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>© {new Date().getFullYear()} FilosofíZate</p>
+      <p>Vicente Domínguez Arca</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+
+  :global(body) {
+    margin: 0;
+    background: #f4f0e8;
+    color: #1d211d;
+    font-family:
+      Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    line-height: 1.6;
+  }
+
+  :global(a) {
+    color: inherit;
+  }
+
+  .cabecera {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 28px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(29, 33, 29, 0.18);
+  }
+
+  .marca {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.45rem;
+    font-weight: bold;
+    text-decoration: none;
+  }
+
+  nav {
+    display: flex;
+    gap: 28px;
+  }
+
+  nav a {
+    font-size: 0.9rem;
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+    text-underline-offset: 5px;
+  }
+
+  main {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+  }
+
+  .presentacion {
+    min-height: 75vh;
+    padding: 110px 0 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-bottom: 1px solid rgba(29, 33, 29, 0.18);
+  }
+
+  .etiqueta {
+    margin: 0 0 18px;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: normal;
+    line-height: 1.08;
+  }
+
+  h1 {
+    max-width: 900px;
+    margin: 0;
+    font-size: clamp(3rem, 8vw, 7.5rem);
+    letter-spacing: -0.045em;
+  }
+
+  .introduccion {
+    max-width: 680px;
+    margin: 34px 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+  }
+
+  .boton {
+    align-self: flex-start;
+    padding: 13px 20px;
+    background: #1d211d;
+    color: #f4f0e8;
+    text-decoration: none;
+    border: 1px solid #1d211d;
+    transition:
+      background 160ms ease,
+      color 160ms ease;
+  }
+
+  .boton:hover {
+    background: transparent;
+    color: #1d211d;
+  }
+
+  .seccion {
+    padding: 100px 0;
+    border-bottom: 1px solid rgba(29, 33, 29, 0.18);
+  }
+
+  .titulo-seccion {
+    margin-bottom: 45px;
+  }
+
+  h2 {
+    max-width: 850px;
+    margin: 0;
+    font-size: clamp(2.3rem, 5vw, 4.8rem);
+    letter-spacing: -0.035em;
+  }
+
+  .rejilla {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .tarjeta {
+    min-height: 410px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(29, 33, 29, 0.25);
+    transition:
+      transform 180ms ease,
+      background 180ms ease;
+  }
+
+  .tarjeta:hover {
+    background: #ebe4d7;
+    transform: translateY(-4px);
+  }
+
+  .temas {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+  }
+
+  .temas span {
+    padding: 4px 8px;
+    border: 1px solid rgba(29, 33, 29, 0.35);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .tarjeta h3 {
+    margin: 55px 0 20px;
+    font-size: 2rem;
+  }
+
+  .tarjeta p {
+    margin: 0 0 30px;
+  }
+
+  .tarjeta a {
+    margin-top: auto;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .manifiesto,
+  .proyecto {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 70px;
+  }
+
+  .manifiesto .etiqueta,
+  .proyecto .etiqueta {
+    grid-column: 1;
+  }
+
+  .manifiesto h2,
+  .proyecto h2 {
+    grid-column: 2;
+  }
+
+  .manifiesto > p:last-child,
+  .proyecto > p:last-child {
+    grid-column: 2;
+    max-width: 650px;
+    margin-top: 35px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.25rem;
+  }
+
+  footer {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 35px 0 60px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 800px) {
+    .cabecera {
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    nav {
+      flex-direction: column;
+      gap: 5px;
+      text-align: right;
+    }
+
+    .presentacion {
+      min-height: auto;
+      padding: 85px 0;
+    }
+
+    .rejilla {
+      grid-template-columns: 1fr;
+    }
+
+    .tarjeta {
+      min-height: 330px;
+    }
+
+    .manifiesto,
+    .proyecto {
+      display: block;
+    }
+
+    .manifiesto h2,
+    .proyecto h2 {
+      margin-top: 15px;
+    }
+
+    footer {
+      flex-direction: column;
+    }
+  }
+</style>
