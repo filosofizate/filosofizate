@@ -117,7 +117,7 @@ El capitalismo contemporáneo ha universalizado la interdependencia social hasta
 
 La conciencia de esta unidad ya existe. Lo que impide su expresión es el miedo que inhibe la confianza. La transformación histórica depende de la creación de estructuras que permitan que la unidad social latente se manifieste como sujeto histórico efectivo.
 
-# Referencias Conceptuales {#referencias-conceptuales .unnumbered}
+# Referencias Conceptuales
 
 Marx, Karl. Crítica de la economía política; El Capital.
 
