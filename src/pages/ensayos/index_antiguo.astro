@@ -119,7 +119,6 @@ const ensayos = [
         <a href="#ensayos">Ensayos</a>
         <a href="#conceptos">Conceptos</a>
         <a href="#proyecto">Proyecto</a>
-        <a href="#participa">Participa</a>
       </nav>
     </header>
 
@@ -275,99 +274,12 @@ const ensayos = [
             de elaboración, contraste y conversación.
           </p>
 
-          <a href="#participa">
-            Construye filosofía conmigo
+          <a href="mailto:contacto@filosofizate.es">
+            Proponer una objeción o una referencia
             <span aria-hidden="true">→</span>
           </a>
         </div>
       </section>
-
-      <section class="seccion participa" id="participa">
-        <div class="participa-introduccion">
-          <p class="sobrelinea">Conversación abierta</p>
-
-          <h2>Construye filosofía conmigo.</h2>
-
-          <p>
-            La filosofía no se escribe en soledad. Si encuentras un error,
-            una objeción, una referencia olvidada o una intuición que merezca
-            ser pensada, me gustaría leerla.
-          </p>
-
-          <p>
-            Cada mensaje forma parte de una conversación que puede modificar
-            futuros ensayos.
-          </p>
-        </div>
-
-        <form
-          class="formulario-contacto"
-          id="formulario-contacto"
-          action="https://formsubmit.co/ajax/contacto@filosofizate.es"
-          method="POST"
-        >
-          <input
-            type="hidden"
-            name="_subject"
-            value="Nueva aportación desde FilosofíZate"
-          />
-
-          <input
-            type="hidden"
-            name="_template"
-            value="table"
-          />
-
-          <input
-            type="text"
-            name="_honey"
-            class="campo-trampa"
-            tabindex="-1"
-            autocomplete="off"
-            aria-hidden="true"
-          />
-
-          <div class="campo">
-            <label for="asunto">Asunto</label>
-
-            <input
-              id="asunto"
-              name="Asunto"
-              type="text"
-              maxlength="160"
-              autocomplete="off"
-              required
-            />
-          </div>
-
-          <div class="campo">
-            <label for="mensaje">Tu aportación</label>
-
-            <textarea
-              id="mensaje"
-              name="Mensaje"
-              rows="9"
-              maxlength="6000"
-              required
-            ></textarea>
-          </div>
-
-          <div class="acciones-formulario">
-            <p
-              class="estado-formulario"
-              id="estado-formulario"
-              role="status"
-              aria-live="polite"
-            ></p>
-
-            <button class="boton-enviar" type="submit">
-              Enviar aportación
-              <span aria-hidden="true">→</span>
-            </button>
-          </div>
-        </form>
-      </section>
-
     </main>
 
     <footer>
@@ -380,59 +292,6 @@ const ensayos = [
     </footer>
   </body>
 </html>
-
-
-<script>
-  const formulario = document.querySelector<HTMLFormElement>(
-    "#formulario-contacto"
-  );
-
-  const estado = document.querySelector<HTMLElement>(
-    "#estado-formulario"
-  );
-
-  formulario?.addEventListener("submit", async (evento) => {
-    evento.preventDefault();
-
-    const boton = formulario.querySelector<HTMLButtonElement>(
-      "button[type='submit']"
-    );
-
-    if (!boton || !estado) return;
-
-    boton.disabled = true;
-    estado.textContent = "Enviando…";
-
-    try {
-      const respuesta = await fetch(formulario.action, {
-        method: "POST",
-        body: new FormData(formulario),
-        headers: {
-          Accept: "application/json",
-        },
-      });
-
-      const resultado = await respuesta.json();
-
-      if (!respuesta.ok || resultado.success === "false") {
-        throw new Error(
-          resultado.message || "No se pudo enviar el mensaje."
-        );
-      }
-
-      formulario.reset();
-      estado.textContent =
-        "Gracias. Tu aportación ha sido enviada correctamente.";
-    } catch (error) {
-      estado.textContent =
-        error instanceof Error
-          ? error.message
-          : "No se pudo enviar el mensaje. Inténtalo de nuevo.";
-    } finally {
-      boton.disabled = false;
-    }
-  });
-</script>
 
 <style>
   :global(*) {
@@ -464,120 +323,6 @@ const ensayos = [
 
   .cabecera,
   main,
-
-  .participa {
-    display: grid;
-    grid-template-columns: 1fr 1.35fr;
-    gap: 100px;
-  }
-
-  .participa-introduccion > p:not(.sobrelinea) {
-    max-width: 610px;
-    margin: 32px 0 0;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.2rem;
-  }
-
-  .participa-introduccion > p + p:not(.sobrelinea) {
-    margin-top: 18px;
-    color: var(--suave);
-  }
-
-  .formulario-contacto {
-    padding-top: 45px;
-  }
-
-  .campo {
-    margin-bottom: 38px;
-  }
-
-  .campo label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-
-  .campo input,
-  .campo textarea {
-    width: 100%;
-    padding: 13px 0;
-    border: 0;
-    border-bottom: 1px solid var(--tinta);
-    border-radius: 0;
-    outline: none;
-    background: transparent;
-    color: var(--tinta);
-    font: inherit;
-  }
-
-  .campo textarea {
-    min-height: 230px;
-    resize: vertical;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.12rem;
-    line-height: 1.55;
-  }
-
-  .campo input:focus,
-  .campo textarea:focus {
-    border-bottom-color: var(--acento);
-  }
-
-  .campo-trampa {
-    position: absolute;
-    left: -10000px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-  }
-
-  .acciones-formulario {
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-  }
-
-  .estado-formulario {
-    margin: 0;
-    color: var(--suave);
-    font-size: 0.85rem;
-  }
-
-  .boton-enviar {
-    min-width: 215px;
-    padding: 15px 18px;
-    display: flex;
-    justify-content: space-between;
-    gap: 28px;
-    border: 1px solid var(--tinta);
-    background: transparent;
-    color: var(--tinta);
-    cursor: pointer;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    transition:
-      background 180ms ease,
-      color 180ms ease,
-      opacity 180ms ease;
-  }
-
-  .boton-enviar:hover:not(:disabled) {
-    background: var(--tinta);
-    color: var(--fondo);
-  }
-
-  .boton-enviar:disabled {
-    cursor: wait;
-    opacity: 0.55;
-  }
-
   footer {
     width: min(1240px, calc(100% - 48px));
     margin: 0 auto;
@@ -917,120 +662,6 @@ const ensayos = [
     letter-spacing: 0.08em;
   }
 
-
-  .participa {
-    display: grid;
-    grid-template-columns: 1fr 1.35fr;
-    gap: 100px;
-  }
-
-  .participa-introduccion > p:not(.sobrelinea) {
-    max-width: 610px;
-    margin: 32px 0 0;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.2rem;
-  }
-
-  .participa-introduccion > p + p:not(.sobrelinea) {
-    margin-top: 18px;
-    color: var(--suave);
-  }
-
-  .formulario-contacto {
-    padding-top: 45px;
-  }
-
-  .campo {
-    margin-bottom: 38px;
-  }
-
-  .campo label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-
-  .campo input,
-  .campo textarea {
-    width: 100%;
-    padding: 13px 0;
-    border: 0;
-    border-bottom: 1px solid var(--tinta);
-    border-radius: 0;
-    outline: none;
-    background: transparent;
-    color: var(--tinta);
-    font: inherit;
-  }
-
-  .campo textarea {
-    min-height: 230px;
-    resize: vertical;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.12rem;
-    line-height: 1.55;
-  }
-
-  .campo input:focus,
-  .campo textarea:focus {
-    border-bottom-color: var(--acento);
-  }
-
-  .campo-trampa {
-    position: absolute;
-    left: -10000px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-  }
-
-  .acciones-formulario {
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-  }
-
-  .estado-formulario {
-    margin: 0;
-    color: var(--suave);
-    font-size: 0.85rem;
-  }
-
-  .boton-enviar {
-    min-width: 215px;
-    padding: 15px 18px;
-    display: flex;
-    justify-content: space-between;
-    gap: 28px;
-    border: 1px solid var(--tinta);
-    background: transparent;
-    color: var(--tinta);
-    cursor: pointer;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    transition:
-      background 180ms ease,
-      color 180ms ease,
-      opacity 180ms ease;
-  }
-
-  .boton-enviar:hover:not(:disabled) {
-    background: var(--tinta);
-    color: var(--fondo);
-  }
-
-  .boton-enviar:disabled {
-    cursor: wait;
-    opacity: 0.55;
-  }
-
   footer {
     padding: 50px 0 70px;
     display: flex;
@@ -1068,8 +699,7 @@ const ensayos = [
     .hero-inferior,
     .cabecera-seccion,
     .manifiesto,
-    .proyecto,
-    .participa {
+    .proyecto {
       display: block;
     }
 
@@ -1101,140 +731,15 @@ const ensayos = [
       min-height: auto;
     }
 
-    .texto-proyecto,
-    .formulario-contacto {
+    .texto-proyecto {
       padding-top: 40px;
-    }
-
-    .acciones-formulario {
-      align-items: stretch;
-      flex-direction: column;
-    }
-
-    .estado-formulario,
-    .boton-enviar {
-      width: 100%;
     }
   }
 
   @media (max-width: 560px) {
     .cabecera,
     main,
-  
-  .participa {
-    display: grid;
-    grid-template-columns: 1fr 1.35fr;
-    gap: 100px;
-  }
-
-  .participa-introduccion > p:not(.sobrelinea) {
-    max-width: 610px;
-    margin: 32px 0 0;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.2rem;
-  }
-
-  .participa-introduccion > p + p:not(.sobrelinea) {
-    margin-top: 18px;
-    color: var(--suave);
-  }
-
-  .formulario-contacto {
-    padding-top: 45px;
-  }
-
-  .campo {
-    margin-bottom: 38px;
-  }
-
-  .campo label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-
-  .campo input,
-  .campo textarea {
-    width: 100%;
-    padding: 13px 0;
-    border: 0;
-    border-bottom: 1px solid var(--tinta);
-    border-radius: 0;
-    outline: none;
-    background: transparent;
-    color: var(--tinta);
-    font: inherit;
-  }
-
-  .campo textarea {
-    min-height: 230px;
-    resize: vertical;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.12rem;
-    line-height: 1.55;
-  }
-
-  .campo input:focus,
-  .campo textarea:focus {
-    border-bottom-color: var(--acento);
-  }
-
-  .campo-trampa {
-    position: absolute;
-    left: -10000px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-  }
-
-  .acciones-formulario {
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-  }
-
-  .estado-formulario {
-    margin: 0;
-    color: var(--suave);
-    font-size: 0.85rem;
-  }
-
-  .boton-enviar {
-    min-width: 215px;
-    padding: 15px 18px;
-    display: flex;
-    justify-content: space-between;
-    gap: 28px;
-    border: 1px solid var(--tinta);
-    background: transparent;
-    color: var(--tinta);
-    cursor: pointer;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    transition:
-      background 180ms ease,
-      color 180ms ease,
-      opacity 180ms ease;
-  }
-
-  .boton-enviar:hover:not(:disabled) {
-    background: var(--tinta);
-    color: var(--fondo);
-  }
-
-  .boton-enviar:disabled {
-    cursor: wait;
-    opacity: 0.55;
-  }
-
-  footer {
+    footer {
       width: min(100% - 30px, 1240px);
     }
 
@@ -1264,121 +769,7 @@ const ensayos = [
       margin-bottom: 12px;
     }
 
-  
-  .participa {
-    display: grid;
-    grid-template-columns: 1fr 1.35fr;
-    gap: 100px;
-  }
-
-  .participa-introduccion > p:not(.sobrelinea) {
-    max-width: 610px;
-    margin: 32px 0 0;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.2rem;
-  }
-
-  .participa-introduccion > p + p:not(.sobrelinea) {
-    margin-top: 18px;
-    color: var(--suave);
-  }
-
-  .formulario-contacto {
-    padding-top: 45px;
-  }
-
-  .campo {
-    margin-bottom: 38px;
-  }
-
-  .campo label {
-    display: block;
-    margin-bottom: 10px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-  }
-
-  .campo input,
-  .campo textarea {
-    width: 100%;
-    padding: 13px 0;
-    border: 0;
-    border-bottom: 1px solid var(--tinta);
-    border-radius: 0;
-    outline: none;
-    background: transparent;
-    color: var(--tinta);
-    font: inherit;
-  }
-
-  .campo textarea {
-    min-height: 230px;
-    resize: vertical;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.12rem;
-    line-height: 1.55;
-  }
-
-  .campo input:focus,
-  .campo textarea:focus {
-    border-bottom-color: var(--acento);
-  }
-
-  .campo-trampa {
-    position: absolute;
-    left: -10000px;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-  }
-
-  .acciones-formulario {
-    margin-top: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 24px;
-  }
-
-  .estado-formulario {
-    margin: 0;
-    color: var(--suave);
-    font-size: 0.85rem;
-  }
-
-  .boton-enviar {
-    min-width: 215px;
-    padding: 15px 18px;
-    display: flex;
-    justify-content: space-between;
-    gap: 28px;
-    border: 1px solid var(--tinta);
-    background: transparent;
-    color: var(--tinta);
-    cursor: pointer;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    transition:
-      background 180ms ease,
-      color 180ms ease,
-      opacity 180ms ease;
-  }
-
-  .boton-enviar:hover:not(:disabled) {
-    background: var(--tinta);
-    color: var(--fondo);
-  }
-
-  .boton-enviar:disabled {
-    cursor: wait;
-    opacity: 0.55;
-  }
-
-  footer {
+    footer {
       flex-direction: column;
       gap: 30px;
     }
