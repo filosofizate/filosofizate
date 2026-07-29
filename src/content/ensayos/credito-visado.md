@@ -17,7 +17,7 @@ El pasaporte suele presentarse como un documento neutral de identificación. Sin
 
 El propósito de este texto no es elaborar un tratado moral sobre la migración, ni reducir el fenómeno migratorio a una consecuencia lineal del capitalismo. La movilidad humana responde a causas múltiples: guerras, persecuciones, catástrofes, expectativas de vida, vínculos familiares, desigualdades económicas, transformaciones laborales y deseos legítimos de mejora personal. Sin embargo, una crítica seria no puede ignorar que, en el orden contemporáneo, el crédito económico previo puede operar como condición suficiente para obtener el "crédito" de numerosos Estados: visados, permisos de residencia e incluso, en ciertos casos, pasaportes.
 
-# Genealogía: pasaporte, paso y fiscalidad {#genealogía-pasaporte-paso-y-fiscalidad .unnumbered}
+# Genealogía: pasaporte, paso y fiscalidad
 
 La historia del pasaporte no posee un origen único. Existen múltiples antecedentes antiguos y medievales: salvoconductos, cartas de tránsito, documentos de protección, permisos de circulación y certificaciones emitidas por autoridades políticas o religiosas. Entre esos antecedentes aparece con frecuencia la *bara'a*, utilizada en determinados contextos islámicos medievales como certificación de que una persona había cumplido sus obligaciones fiscales y no mantenía deudas con el erario.
 
@@ -27,7 +27,7 @@ Este punto es decisivo. La movilidad no aparece históricamente como una pura li
 
 Incluso la etimología de "pasaporte" conserva esta ambigüedad material. El término francés *passeport* remite a la acción de pasar y a un *port* que puede entenderse, según la tradición etimológica considerada, como puerto, puerta, paso o lugar de tránsito. Lo relevante aquí no es resolver definitivamente la cuestión filológica, sino advertir que el término conserva la imagen de una barrera: algo que debe ser cruzado mediante autorización.
 
-# Tres sentidos del crédito {#tres-sentidos-del-crédito .unnumbered}
+# Tres sentidos del crédito
 
 La hipótesis central de este texto exige distinguir tres sentidos de crédito.
 
@@ -39,7 +39,7 @@ En tercer lugar, crédito como capacidad financiera. Este es el sentido contempo
 
 La tesis crítica surge de la superposición de estos tres sentidos: el crédito financiero puede transformarse en crédito institucional. Quien posee recursos económicos no sólo puede comprar bienes o servicios; en determinados marcos jurídicos, puede comprar confianza, reducir sospechas, acelerar procedimientos y acceder a formas reforzadas de movilidad.
 
-# El pasaporte como capital institucional heredado {#el-pasaporte-como-capital-institucional-heredado .unnumbered}
+# El pasaporte como capital institucional heredado
 
 El pasaporte moderno acredita formalmente la nacionalidad. Pero en la práctica representa también una posición dentro de la jerarquía internacional de los Estados. No todos los pasaportes valen lo mismo. Algunos abren fronteras; otros las cierran. Algunos producen confianza inmediata; otros activan sospecha, demora, entrevista, prueba documental y coste económico.
 
@@ -47,7 +47,7 @@ En este sentido, el pasaporte puede entenderse como una forma de capital institu
 
 Aquí resulta pertinente el diálogo con Bourdieu. Si el capital cultural o social permite ocupar posiciones diferenciales dentro de un campo, el pasaporte opera como una modalidad de capital político-institucional. No es simplemente un documento; es una credencial de acceso a oportunidades desigualmente distribuidas.
 
-# El Estado y los medios legítimos de movimiento {#el-estado-y-los-medios-legítimos-de-movimiento .unnumbered}
+# El Estado y los medios legítimos de movimiento
 
 John Torpey ha mostrado que el Estado moderno no sólo monopoliza los medios legítimos de violencia, como afirmaba Weber, sino también los medios legítimos de movimiento. El pasaporte, el visado, el registro civil, la identificación personal y la frontera administrativa forman parte de esa apropiación estatal de la movilidad.
 
@@ -55,7 +55,7 @@ Desde esta perspectiva, el pasaporte no es un residuo burocrático menor, sino u
 
 La aportación específica de este texto consiste en añadir que esa monopolización de la movilidad está atravesada por una lógica crediticia. El Estado no sólo pregunta quién eres, sino qué confianza mereces. Y esa confianza puede formularse jurídicamente, policialmente, laboralmente, culturalmente o económicamente.
 
-# El visado como evaluación crediticia {#el-visado-como-evaluación-crediticia .unnumbered}
+# El visado como evaluación crediticia
 
 El visado constituye una autorización adicional. Mientras el pasaporte acredita una pertenencia política de origen, el visado expresa una evaluación del Estado receptor. El solicitante debe demostrar que no representa una amenaza, que posee medios suficientes, que tiene motivos legítimos de entrada, que no permanecerá irregularmente o que aportará algún valor al país receptor.
 
@@ -63,7 +63,7 @@ En ese sentido, el visado funciona como una evaluación crediticia ampliada. No 
 
 El migrante cualificado, con ingresos, contrato, ahorros, patrimonio o una profesión demandada, recibe más fácilmente el crédito institucional del Estado receptor. El migrante pobre, incluso cuando migra por razones comprensibles o legítimas, debe demostrar mucho más. No basta con querer pasar; debe convencer de que merece pasar.
 
-# Ciudadanía por inversión: el crédito que compra crédito {#ciudadanía-por-inversión-el-crédito-que-compra-crédito .unnumbered}
+# Ciudadanía por inversión: el crédito que compra crédito
 
 Esta lógica alcanza su forma extrema en los programas de residencia o ciudadanía por inversión. En ellos, determinados Estados permiten obtener residencia, e incluso nacionalidad, a cambio de inversiones, donaciones, compra de deuda pública, adquisición inmobiliaria u otros compromisos económicos.
 
@@ -73,7 +73,7 @@ Naturalmente, estos programas suelen incluir mecanismos de diligencia debida: co
 
 En sus versiones más problemáticas, estos programas han permitido que individuos con historiales controvertidos o con riesgos jurídicos significativos accedan a nuevas formas de movilidad internacional. No es lo normal, ni debe presentarse como regla general. Pero su mera posibilidad revela una asimetría fundamental: allí donde el migrante pobre debe probar necesidad, arraigo, obediencia y utilidad, el migrante rico puede presentar inversión.
 
-# Migración, formación y rentabilidad {#migración-formación-y-rentabilidad .unnumbered}
+# Migración, formación y rentabilidad
 
 La cuestión se vuelve más compleja cuando se observa la migración ordinaria. Una persona puede traer experiencia laboral, capacidades prácticas y voluntad de integración, pero si sus habilidades no son inmediatamente traducibles al mercado receptor, aparece un coste de adaptación.
 
@@ -83,7 +83,7 @@ Aquí aparece una tensión central del capitalismo contemporáneo. Las empresas 
 
 La paradoja es evidente: quien más necesita crédito para integrarse es, a menudo, quien menos crédito recibe. La falta de crédito económico se convierte en falta de crédito institucional, y la falta de crédito institucional refuerza la exclusión económica.
 
-# La tasa geopolítica del pasaporte {#la-tasa-geopolítica-del-pasaporte .unnumbered}
+# La tasa geopolítica del pasaporte
 
 Puede proponerse aquí una analogía con la usura. En el crédito financiero, el interés funciona como precio del acceso al dinero. En la movilidad global, el visado funciona en ocasiones como precio del acceso al territorio. Pero ese precio no es igual para todos. Depende del pasaporte de origen, del capital económico, de la profesión, de la raza administrativamente percibida, de la lengua, de la religión, del país emisor y de la posición geopolítica del solicitante.
 
@@ -91,7 +91,7 @@ El sistema internacional aplica así una suerte de tasa geopolítica diferencial
 
 El pasaporte fuerte reduce el interés de entrada. El pasaporte débil lo aumenta. El crédito económico puede compensar parcialmente esa debilidad. La pobreza, por el contrario, multiplica la sospecha.
 
-# Dimensión normativa {#dimensión-normativa .unnumbered}
+# Dimensión normativa
 
 Desde una teoría de la justicia, el pasaporte plantea un problema evidente: distribuye oportunidades vitales a partir de una circunstancia no elegida. En términos del igualitarismo de la suerte, la nacionalidad de nacimiento pertenece al ámbito de la fortuna bruta, no al mérito individual. Nadie merece moralmente un pasaporte fuerte del mismo modo que nadie merece moralmente un pasaporte débil.
 
@@ -99,7 +99,7 @@ Desde el enfoque de las capacidades, la movilidad no es un lujo secundario, sino
 
 No se sigue de aquí que toda frontera sea ilegítima ni que todo control migratorio sea moralmente inadmisible. La cuestión es más precisa: si los Estados regulan la movilidad, deben poder justificar por qué ciertas personas heredan libertad de movimiento mientras otras heredan sospecha.
 
-# Conclusión {#conclusión .unnumbered}
+# Conclusión
 
 El pasaporte y el visado no son meros instrumentos administrativos. Son dispositivos de reconocimiento, clasificación y selección. Acreditan identidad, pero también distribuyen confianza. Permiten pasar, pero también producen barreras. Organizan la movilidad, pero también jerarquizan vidas.
 
@@ -109,10 +109,7 @@ En el extremo, el crédito financiero puede convertirse en pasaporte. En la norm
 
 Por ello, una crítica contemporánea del crédito no debe limitarse al banco, al préstamo o al interés. Debe atender también a las formas en que el crédito organiza la confianza social, la movilidad humana y la pertenencia política. El pasaporte es, en este sentido, una de las expresiones más visibles de una desigualdad heredada que se presenta como simple documentación.
 
-# Referencias orientativas {#referencias-orientativas .unnumbered}
-
-::: thebibliography
-9
+# Referencias orientativas
 
 Torpey, John. *The Invention of the Passport: Surveillance, Citizenship and the State*. 2000.
 
@@ -129,4 +126,3 @@ Graeber, David. *En deuda: una historia alternativa de la economía*. 2012.
 Shachar, Ayelet. *The Birthright Lottery: Citizenship and Global Inequality*. 2009.
 
 Cohen, G. A. *On the Currency of Egalitarian Justice, and Other Essays in Political Philosophy*. 2011.
-:::
