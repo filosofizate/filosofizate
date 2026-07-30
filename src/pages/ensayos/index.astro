@@ -114,13 +114,30 @@ const ensayos = [
       content="FilosofíZate: ensayos filosóficos para pensar de nuevo los conceptos con los que vivimos."
     />
 
+    <link
+      rel="icon"
+      type="image/png"
+      href="/iconopng.png"
+    />
+
     <title>FilosofíZate</title>
   </head>
 
   <body>
     <header class="cabecera">
-      <a class="marca" href="/">
-        Filosofí<span>Zate</span>
+    
+      <a class="marca" href="/" aria-label="FilosofíZate, página principal">
+        <img
+          class="simbolo-marca"
+          src="/iconopng.png"
+          alt=""
+          width="34"
+          height="34"
+        />
+
+        <span class="nombre-marca">
+          Filosofí<span>Zate</span>
+        </span>
       </a>
 
       <nav aria-label="Navegación principal">
@@ -501,6 +518,33 @@ const ensayos = [
     letter-spacing: -0.03em;
   }
 
+  .marca {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .simbolo-marca {
+    width: 32px;
+    height: 32px;
+    display: block;
+    object-fit: contain;
+    opacity: 0.72;
+    mix-blend-mode: multiply;
+    transition:
+      opacity 180ms ease,
+      transform 180ms ease;
+  }
+
+  .marca:hover .simbolo-marca {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+
+  .nombre-marca {
+    white-space: nowrap;
+  }
+
   .marca span {
     color: var(--acento);
   }
@@ -840,6 +884,15 @@ const ensayos = [
       align-items: flex-start;
       padding: 24px 0;
     }
+
+    .simbolo-marca {
+      width: 28px;
+      height: 28px;
+    }
+
+  .marca {
+    gap: 8px;
+  }
 
     nav {
       flex-direction: column;
