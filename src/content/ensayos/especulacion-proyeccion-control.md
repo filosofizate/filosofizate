@@ -95,8 +95,7 @@ Por ahora me basta con dejar planteada la pregunta que da cierre a esta nota.
 
 ¿Y si la especulación económica terminara siendo, de manera inevitable, una forma de imposición dentro de cualquier sistema basado en el capital?
 
-::: thebibliography
-99
+# Referencias orientativas
 
 Arrighi, G. *The Long Twentieth Century: Money, Power, and the Origins of Our Times*. Verso, Londres, 1994.
 
@@ -113,4 +112,3 @@ Marx, K. *Das Kapital. Band III*. Hamburg, 1894. (Trad. esp.: *El capital*, tomo
 Meillassoux, Q. *Après la finitude. Essai sur la nécessité de la contingence*. Éditions du Seuil, París, 2006. (Trad. esp.: *Después de la finitud*.)
 
 von Mises, L. *Human Action: A Treatise on Economics*. Yale University Press, New Haven, 1949.
-:::
