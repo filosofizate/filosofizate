@@ -1,20 +1,10 @@
 from pathlib import Path
-import hashlib
 import re
 
-# Ejemplo de salida:
-# [§a13f9c2d] Este es un párrafo del ensayo.
-
-PARAGRAPH_ID_RE = re.compile(r"^\[§[0-9a-f]{8}\]\s+")
-
-
-def paragraph_id(text: str) -> str:
-    """
-    Genera un identificador estable a partir del contenido del párrafo.
-    """
-    normalized = " ".join(text.split())
-    digest = hashlib.sha256(normalized.encode("utf-8")).hexdigest()
-    return digest[:8]
+# Detecta índices ya existentes como:
+# [§1] texto...
+# [§be6ebf69] texto...
+PARAGRAPH_ID_RE = re.compile(r"^\[§[0-9a-zA-Z]+\]\s+")
 
 
 def should_index(block: str) -> bool:
@@ -59,27 +49,29 @@ def should_index(block: str) -> bool:
 
 def strip_existing_id(block: str) -> str:
     """
-    Elimina un identificador previamente generado.
-    Esto hace que el script sea idempotente.
+    Elimina un índice previo, ya sea numérico o hexadecimal.
     """
     return PARAGRAPH_ID_RE.sub("", block.strip(), count=1)
 
 
 def index_markdown(content: str) -> str:
     """
-    Añade identificadores estables a los párrafos Markdown.
+    Numera secuencialmente los párrafos Markdown:
+    [§1], [§2], [§3]...
     """
     blocks = re.split(r"\n\s*\n", content)
+
     result = []
+    paragraph_number = 1
 
     for block in blocks:
         clean = strip_existing_id(block)
 
         if should_index(clean):
-            pid = paragraph_id(clean)
-            result.append(f"[§{pid}] {clean}")
+            result.append(f"[§{paragraph_number}] {clean}")
+            paragraph_number += 1
         else:
-            result.append(block.strip())
+            result.append(clean)
 
     return "\n\n".join(result).rstrip() + "\n"
 
@@ -104,8 +96,9 @@ if __name__ == "__main__":
     import argparse
 
     parser = argparse.ArgumentParser(
-        description="Añade identificadores estables a los párrafos de archivos Markdown."
+        description="Numera los párrafos de archivos Markdown con §1, §2, §3..."
     )
+
     parser.add_argument(
         "directory",
         type=Path,
