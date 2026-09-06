@@ -100,14 +100,20 @@ if __name__ == "__main__":
     )
 
     parser.add_argument(
-        "directory",
+        "path",
         type=Path,
-        help="Carpeta que contiene los archivos .md",
+        help="Archivo .md o carpeta que contiene archivos .md",
     )
 
     args = parser.parse_args()
 
-    if not args.directory.exists():
-        raise SystemExit(f"No existe la carpeta: {args.directory}")
+    if not args.path.exists():
+        raise SystemExit(f"No existe la ruta: {args.path}")
 
-    process_directory(args.directory)
+    if args.path.is_file():
+        if args.path.suffix.lower() != ".md":
+            raise SystemExit("El archivo debe tener extensión .md")
+        process_file(args.path)
+
+    elif args.path.is_dir():
+        process_directory(args.path)
