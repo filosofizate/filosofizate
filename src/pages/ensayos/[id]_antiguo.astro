@@ -6,7 +6,6 @@ import {
 } from "astro:content";
 
 import EnsayoLayout from "../../layouts/EnsayoLayout.astro";
-import Comentarios from "../../components/Comentarios.astro";
 
 export async function getStaticPaths() {
   const todosLosEnsayos = await getCollection("ensayos");
@@ -33,8 +32,6 @@ interface Props {
 
 const { ensayo } = Astro.props as Props;
 const { Content } = await render(ensayo);
-
-const esDebateAbierto = ensayo.id === "neoliberalismo-ia";
 ---
 
 <EnsayoLayout
@@ -45,10 +42,4 @@ const esDebateAbierto = ensayo.id === "neoliberalismo-ia";
   conceptos={ensayo.data.conceptos}
 >
   <Content />
-
-  {
-    esDebateAbierto && (
-      <Comentarios slug={ensayo.id} />
-    )
-  }
 </EnsayoLayout>

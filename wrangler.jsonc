@@ -1,8 +1,19 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "filosofizate",
+  "main": "@astrojs/cloudflare/entrypoints/server",
   "compatibility_date": "2026-07-29",
+
   "assets": {
-    "directory": "./dist"
-  }
+    "directory": "./dist",
+    "binding": "ASSETS"
+  },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "filosofizate-comentarios",
+      "database_id": "9446e16d-656b-4924-b8c1-390b81dfa4c5"
+    }
+  ]
 }

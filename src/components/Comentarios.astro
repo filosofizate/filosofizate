@@ -1,0 +1,499 @@
+---
+interface Props {
+  slug: string;
+}
+
+const { slug } = Astro.props;
+---
+
+<section class="debate-abierto" aria-labelledby="titulo-debate" data-comentarios data-slug={slug}>
+  <p class="debate-etiqueta">Debate abierto</p>
+
+  <h2 id="titulo-debate">Continúa la reflexión</h2>
+
+  <p class="debate-introduccion">
+    Esta entrada queda deliberadamente abierta. Puedes discutir sus premisas,
+    señalar errores, proponer alternativas o llevar el argumento hacia otra dirección.
+  </p>
+
+  <form class="formulario-debate" data-formulario>
+    <input type="hidden" name="slug" value={slug} />
+
+    <div class="campo-trampa" aria-hidden="true">
+      <label>
+        No rellenar
+        <input name="web" type="text" tabindex="-1" autocomplete="off" />
+      </label>
+    </div>
+
+    <div class="campo">
+      <label for={`nombre-${slug}`}>
+        Nombre o pseudónimo <span>(opcional)</span>
+      </label>
+      <input
+        id={`nombre-${slug}`}
+        name="nombre"
+        type="text"
+        maxlength="80"
+        autocomplete="name"
+      />
+    </div>
+
+    <div class="campo">
+      <label for={`comentario-${slug}`}>Comentario</label>
+      <textarea
+        id={`comentario-${slug}`}
+        name="comentario"
+        rows="8"
+        maxlength="5000"
+        required
+      ></textarea>
+    </div>
+
+    <div class="acciones-formulario">
+      <p class="estado" data-estado aria-live="polite"></p>
+
+      <button type="submit" class="boton-publicar">
+        Publicar comentario
+        <span aria-hidden="true">→</span>
+      </button>
+    </div>
+  </form>
+
+  <div class="comentarios">
+    <div class="cabecera-comentarios">
+      <p class="comentarios-titulo">Comentarios</p>
+
+      <button type="button" class="boton-admin" data-admin>
+        Administrar
+      </button>
+    </div>
+
+    <p class="estado-carga" data-carga>Cargando comentarios…</p>
+    <div class="lista-comentarios" data-lista></div>
+  </div>
+</section>
+
+<script>
+  type Comentario = {
+    id: number;
+    slug: string;
+    nombre: string | null;
+    comentario: string;
+    fecha: string;
+  };
+
+  const bloques = document.querySelectorAll<HTMLElement>("[data-comentarios]");
+
+  bloques.forEach((bloque) => {
+    const slug = bloque.dataset.slug;
+    const formulario = bloque.querySelector<HTMLFormElement>("[data-formulario]");
+    const estado = bloque.querySelector<HTMLElement>("[data-estado]");
+    const carga = bloque.querySelector<HTMLElement>("[data-carga]");
+    const lista = bloque.querySelector<HTMLElement>("[data-lista]");
+    const botonAdmin = bloque.querySelector<HTMLButtonElement>("[data-admin]");
+
+    if (!slug || !formulario || !estado || !carga || !lista || !botonAdmin) return;
+
+    let tokenAdmin: string | null = null;
+    let comentariosActuales: Comentario[] = [];
+
+    const formatearFecha = (fecha: string) => {
+      const d = new Date(fecha);
+      if (Number.isNaN(d.getTime())) return fecha;
+
+      return new Intl.DateTimeFormat("es-ES", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(d);
+    };
+
+    const renderizar = () => {
+      lista.replaceChildren();
+
+      if (comentariosActuales.length === 0) {
+        const vacio = document.createElement("p");
+        vacio.className = "sin-comentarios";
+        vacio.textContent = "Todavía no hay comentarios. Puedes abrir el debate.";
+        lista.append(vacio);
+        return;
+      }
+
+      comentariosActuales.forEach((item) => {
+        const article = document.createElement("article");
+        article.className = "comentario";
+
+        const cabecera = document.createElement("div");
+        cabecera.className = "comentario-cabecera";
+
+        const autor = document.createElement("strong");
+        autor.textContent = item.nombre?.trim() || "Anónimo";
+
+        const fecha = document.createElement("time");
+        fecha.dateTime = item.fecha;
+        fecha.textContent = formatearFecha(item.fecha);
+
+        cabecera.append(autor, fecha);
+
+        const texto = document.createElement("p");
+        texto.className = "comentario-texto";
+        texto.textContent = item.comentario;
+
+        article.append(cabecera, texto);
+
+        if (tokenAdmin) {
+          const borrar = document.createElement("button");
+          borrar.type = "button";
+          borrar.className = "boton-eliminar";
+          borrar.textContent = "Eliminar";
+
+          borrar.addEventListener("click", async () => {
+            if (!confirm("¿Eliminar este comentario?")) return;
+
+            borrar.disabled = true;
+
+            try {
+              const respuesta = await fetch("/api/comentarios/eliminar", {
+                method: "DELETE",
+                headers: {
+                  "Content-Type": "application/json",
+                  "X-Admin-Token": tokenAdmin ?? "",
+                },
+                body: JSON.stringify({ id: item.id }),
+              });
+
+              const resultado = await respuesta.json();
+
+              if (!respuesta.ok) {
+                throw new Error(resultado?.error || "No se pudo eliminar el comentario.");
+              }
+
+              comentariosActuales = comentariosActuales.filter(
+                (comentario) => comentario.id !== item.id,
+              );
+              renderizar();
+            } catch (error) {
+              alert(
+                error instanceof Error
+                  ? error.message
+                  : "No se pudo eliminar el comentario.",
+              );
+            } finally {
+              borrar.disabled = false;
+            }
+          });
+
+          article.append(borrar);
+        }
+
+        lista.append(article);
+      });
+    };
+
+    const cargar = async () => {
+      carga.textContent = "Cargando comentarios…";
+
+      try {
+        const respuesta = await fetch(
+          `/api/comentarios?slug=${encodeURIComponent(slug)}`,
+        );
+
+        const resultado = await respuesta.json();
+
+        if (!respuesta.ok) {
+          throw new Error(resultado?.error || "No se pudieron cargar los comentarios.");
+        }
+
+        comentariosActuales = Array.isArray(resultado.comentarios)
+          ? resultado.comentarios
+          : [];
+
+        carga.textContent = "";
+        renderizar();
+      } catch (error) {
+        carga.textContent =
+          error instanceof Error
+            ? error.message
+            : "No se pudieron cargar los comentarios.";
+      }
+    };
+
+    formulario.addEventListener("submit", async (evento) => {
+      evento.preventDefault();
+
+      const boton = formulario.querySelector<HTMLButtonElement>(
+        'button[type="submit"]',
+      );
+
+      if (!boton) return;
+
+      boton.disabled = true;
+      estado.textContent = "Publicando…";
+
+      try {
+        const datos = new FormData(formulario);
+
+        const respuesta = await fetch("/api/comentarios", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            slug: datos.get("slug"),
+            nombre: datos.get("nombre"),
+            comentario: datos.get("comentario"),
+            web: datos.get("web"),
+          }),
+        });
+
+        const resultado = await respuesta.json();
+
+        if (!respuesta.ok) {
+          throw new Error(resultado?.error || "No se pudo publicar el comentario.");
+        }
+
+        formulario.reset();
+        estado.textContent = "Comentario publicado.";
+        await cargar();
+      } catch (error) {
+        estado.textContent =
+          error instanceof Error
+            ? error.message
+            : "No se pudo publicar el comentario.";
+      } finally {
+        boton.disabled = false;
+      }
+    });
+
+    botonAdmin.addEventListener("click", () => {
+      if (tokenAdmin) {
+        tokenAdmin = null;
+        botonAdmin.textContent = "Administrar";
+        renderizar();
+        return;
+      }
+
+      const token = prompt("Clave de administración:");
+
+      if (!token) return;
+
+      tokenAdmin = token;
+      botonAdmin.textContent = "Salir de administración";
+      renderizar();
+    });
+
+    void cargar();
+  });
+</script>
+
+<style>
+  .debate-abierto {
+    margin-top: 88px;
+    padding-top: 48px;
+    border-top: 1px solid rgba(23, 25, 23, 0.2);
+  }
+
+  .debate-etiqueta {
+    margin: 0 0 18px;
+    color: #9f3f25;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.17em;
+  }
+
+  .debate-abierto h2 {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(2.2rem, 5vw, 4rem);
+    font-weight: normal;
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+  }
+
+  .debate-introduccion {
+    max-width: 720px;
+    margin: 28px 0 52px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.15rem;
+    line-height: 1.65;
+  }
+
+  .formulario-debate {
+    max-width: 760px;
+  }
+
+  .campo {
+    margin-bottom: 30px;
+  }
+
+  .campo label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .campo label span {
+    opacity: 0.55;
+    font-weight: 400;
+  }
+
+  .campo input,
+  .campo textarea {
+    width: 100%;
+    padding: 12px 0;
+    border: 0;
+    border-bottom: 1px solid #171917;
+    border-radius: 0;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+  }
+
+  .campo textarea {
+    min-height: 190px;
+    resize: vertical;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.05rem;
+    line-height: 1.55;
+  }
+
+  .campo input:focus,
+  .campo textarea:focus {
+    border-bottom-color: #9f3f25;
+  }
+
+  .campo-trampa {
+    position: absolute;
+    left: -10000px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .acciones-formulario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .estado,
+  .estado-carga,
+  .sin-comentarios {
+    margin: 0;
+    opacity: 0.62;
+    font-size: 0.86rem;
+  }
+
+  .boton-publicar {
+    min-width: 220px;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    gap: 28px;
+    border: 1px solid #171917;
+    background: transparent;
+    color: #171917;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+  }
+
+  .boton-publicar:hover:not(:disabled) {
+    background: #171917;
+    color: #eee9df;
+  }
+
+  .boton-publicar:disabled {
+    cursor: wait;
+    opacity: 0.55;
+  }
+
+  .comentarios {
+    margin-top: 72px;
+    padding-top: 34px;
+    border-top: 1px solid rgba(23, 25, 23, 0.2);
+  }
+
+  .cabecera-comentarios {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .comentarios-titulo {
+    margin: 0;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.6rem;
+  }
+
+  .boton-admin,
+  .boton-eliminar {
+    padding: 0;
+    border: 0;
+    border-bottom: 1px solid currentColor;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    font: inherit;
+    font-size: 0.72rem;
+  }
+
+  .lista-comentarios {
+    display: grid;
+    gap: 0;
+  }
+
+  .comentario {
+    position: relative;
+    padding: 28px 0;
+    border-top: 1px solid rgba(23, 25, 23, 0.14);
+  }
+
+  .comentario-cabecera {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 14px;
+    font-size: 0.78rem;
+  }
+
+  .comentario-cabecera time {
+    opacity: 0.55;
+  }
+
+  .comentario-texto {
+    margin: 0;
+    white-space: pre-wrap;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.05rem;
+    line-height: 1.62;
+  }
+
+  .boton-eliminar {
+    margin-top: 16px;
+    color: #9f3f25;
+  }
+
+  @media (max-width: 560px) {
+    .acciones-formulario,
+    .cabecera-comentarios,
+    .comentario-cabecera {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .boton-publicar {
+      width: 100%;
+    }
+  }
+</style>

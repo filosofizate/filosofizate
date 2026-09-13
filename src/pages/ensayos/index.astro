@@ -145,6 +145,14 @@ const ensayos = [
     enlace: "/ensayos/interes-importancia-piedad",
   },
 ];
+
+const debateAbierto = {
+  titulo: "¿Dónde localizar la relación principal entre neoliberalismo e IA?",
+  descripcion:
+    "Una invitación a discutir la huella huniversal de los datos, las dinámicas neoliberales presentes en los sistemas de entrenamiento y el lugar desde el que intervenir sobre la inteligencia artificial.",
+  temas: ["Neoliberalismo", "Inteligencia artificial", "Huniverso"],
+  enlace: "/ensayos/neoliberalismo-ia",
+};
 ---
 
 <!doctype html>
@@ -190,6 +198,7 @@ const ensayos = [
 
       <nav aria-label="Navegación principal">
         <a href="#ensayos">Ensayos</a>
+        <a href="#debate">Debate</a>
         <a href="#conceptos">Conceptos</a>
         <a href="#proyecto">Proyecto</a>
       </nav>
@@ -281,6 +290,48 @@ const ensayos = [
             ))
           }
         </div>
+      </section>
+
+      <section class="seccion debate-abierto" id="debate">
+        <header class="cabecera-seccion debate-cabecera">
+          <div>
+            <p class="sobrelinea">Debate abierto</p>
+            <h2>La reflexión continúa en el lector.</h2>
+          </div>
+
+          <p class="nota-seccion">
+            Una entrada fuera de la numeración habitual, pensada para ser discutida
+            y continuada públicamente.
+          </p>
+        </header>
+
+        <article class="tarjeta-debate">
+          <div class="debate-contenido">
+            <div class="temas">
+              {debateAbierto.temas.map((tema) => <span>{tema}</span>)}
+            </div>
+
+            <p class="debate-marca">Pregunta abierta</p>
+
+            <h3>
+              <a href={debateAbierto.enlace}>{debateAbierto.titulo}</a>
+            </h3>
+
+            <p class="descripcion debate-descripcion">
+              {debateAbierto.descripcion}
+            </p>
+
+            <a class="boton debate-boton" href={debateAbierto.enlace}>
+              Entrar en el debate
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <p class="debate-nota">
+            Lee el texto, discute sus premisas y deja tu comentario sin necesidad
+            de registro.
+          </p>
+        </article>
       </section>
 
       <section class="seccion manifiesto" id="conceptos">
@@ -839,6 +890,71 @@ const ensayos = [
     transform: rotate(45deg);
   }
 
+  /* ==========================
+     Debate abierto
+     ========================== */
+
+  .debate-abierto {
+    position: relative;
+  }
+
+  .debate-cabecera {
+    margin-bottom: 48px;
+  }
+
+  .tarjeta-debate {
+    min-height: 430px;
+    padding: 48px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.7fr) minmax(240px, 0.7fr);
+    gap: 70px;
+    align-items: end;
+    border: 1px solid var(--tinta);
+  }
+
+  .debate-marca {
+    margin: 32px 0 0;
+    color: var(--acento);
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  .tarjeta-debate h3 {
+    max-width: 900px;
+    margin: 18px 0 24px;
+    font-size: clamp(2.7rem, 5.6vw, 5.6rem);
+    letter-spacing: -0.05em;
+  }
+
+  .tarjeta-debate h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .tarjeta-debate h3 a:hover {
+    text-decoration: underline;
+  }
+
+  .debate-descripcion {
+    max-width: 760px;
+  }
+
+  .debate-boton {
+    width: min(100%, 290px);
+    margin-top: 38px;
+  }
+
+  .debate-nota {
+    margin: 0;
+    padding-top: 24px;
+    border-top: 1px solid var(--linea);
+    color: var(--suave);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1.05rem;
+  }
+
   .manifiesto {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -960,6 +1076,12 @@ const ensayos = [
       display: block;
     }
 
+    .tarjeta-debate {
+      grid-template-columns: 1fr;
+      gap: 46px;
+      min-height: auto;
+    }
+
     .hero-inferior .boton {
       margin-top: 38px;
     }
@@ -1015,6 +1137,10 @@ const ensayos = [
 
     .seccion {
       padding: 80px 0;
+    }
+
+    .tarjeta-debate {
+      padding: 28px 22px;
     }
 
     .ensayo {
