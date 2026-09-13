@@ -1,13 +1,11 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "filosofizate",
-  "main": "@astrojs/cloudflare/entrypoints/server",
   "compatibility_date": "2026-07-29",
-
-  "assets": {
-    "directory": "./dist",
-    "binding": "ASSETS"
-  },
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
 
   "d1_databases": [
     {
