@@ -161,21 +161,6 @@ const debateAbierto = {
   temas: ["Neoliberalismo", "Inteligencia artificial", "Huniverso"],
   enlace: "/ensayos/neoliberalismo-ia",
 };
-
-const respuestasAportaciones = [
-  {
-    referencia: "Sobre si el crédito crea capital",
-    ensayo: "Capital, deuda y crédito: una distinción conceptual",
-    fecha: "29 septiembre 2026",
-    respuesta: [
-      `Gracias por la aportación y por la lectura. Creo que tu comentario señala una imprecisión real en mi exposición y me permite matizar algo que probablemente no he expresado con suficiente claridad. Cuando afirmo que el crédito puede generar capital no pretendo sostener que el crédito cree valor, ni contraponer esa afirmación a la concepción marxiana del capital como valor que se valoriza mediante la apropiación de plusvalor. De hecho, parto expresamente de esa concepción al comienzo del texto.`,
-      `Mi propuesta se sitúa en otro punto: en la capacidad del crédito para anticipar un valor futuro y transformarlo en capacidad económica efectiva en el presente. Quizás un ejemplo sencillo permita expresar mejor lo que pretendía decir. Una empresa puede obtener hoy un crédito con el que adquirir maquinaria o pagar salarios. Ni la maquinaria ni los trabajadores han producido todavía el valor con el que ese crédito habrá de ser devuelto; sin embargo, gracias al crédito, esa capacidad productiva puede ponerse en funcionamiento ahora. Será posteriormente cuando la producción realizada permita generar y realizar el valor del que podrán salir, entre otras cosas, la devolución de la deuda y sus intereses.`,
-      `Por tanto, estoy de acuerdo en que sería incorrecto afirmar, sin mayor precisión, que el crédito crea el valor que después se valoriza. No es esa mi propuesta. Cuando hablo de que el crédito «genera capital», me refiero a lo que en el propio texto denomino después capital operativo: una expectativa de valor futuro se convierte, mediante una relación crediticia, en capacidad económica utilizable en el presente. El crédito no crea ese valor futuro; permite, por decirlo de alguna manera, que ese futuro todavía no realizado tenga efectos económicos en el presente.`,
-      `Y es precisamente esa dimensión temporal la que me interesa especialmente: algo que todavía no ha sido producido puede financiar las condiciones presentes de su propia producción. Ahí es donde intento localizar la función estructural del crédito en su articulación con el capital y la deuda. La aportación me hace ver que la expresión «generación de capital» puede confundirse fácilmente con «creación de valor», cuando esa identificación no es la que pretendía establecer. Creo que el texto merece esa corrección.`,
-      `Gracias de nuevo, porque este tipo de matización es precisamente uno de los motivos por los que he abierto FilosofíZate a aportaciones.`,
-    ],
-  },
-];
 ---
 
 <!doctype html>
@@ -222,7 +207,6 @@ const respuestasAportaciones = [
       <nav aria-label="Navegación principal">
         <a href="#ensayos">Ensayos</a>
         <a href="#debate">Debate</a>
-        <a href="#respuestas">Respuestas</a>
         <a href="#conceptos">Conceptos</a>
         <a href="#proyecto">Proyecto</a>
       </nav>
@@ -358,49 +342,6 @@ const respuestasAportaciones = [
         </article>
       </section>
 
-      <section class="seccion respuestas-aportaciones" id="respuestas">
-        <header class="cabecera-seccion">
-          <div>
-            <p class="sobrelinea">Respuestas a aportaciones</p>
-            <h2>La filosofía continúa en la conversación.</h2>
-          </div>
-
-          <p class="nota-seccion">
-            Algunas aportaciones recibidas permiten precisar, corregir o continuar
-            argumentos publicados en FilosofíZate. Aquí recojo mis respuestas sin
-            reproducir ni identificar a quienes las motivaron.
-          </p>
-        </header>
-
-        <div class="lista-respuestas">
-          {
-            respuestasAportaciones.map((entrada, indice) => (
-              <article class="respuesta-aportacion">
-                <div class="respuesta-meta">
-                  <p class="respuesta-numero">
-                    {String(indice + 1).padStart(2, "0")}
-                  </p>
-                  <p class="respuesta-fecha">{entrada.fecha}</p>
-                </div>
-
-                <div class="respuesta-contenido">
-                  <p class="respuesta-origen">
-                    A propósito de
-                    <span>{entrada.ensayo}</span>
-                  </p>
-
-                  <h3>{entrada.referencia}</h3>
-
-                  <div class="respuesta-texto">
-                    {entrada.respuesta.map((parrafo) => <p>{parrafo}</p>)}
-                  </div>
-                </div>
-              </article>
-            ))
-          }
-        </div>
-      </section>
-
       <section class="seccion manifiesto" id="conceptos">
         <div class="columna-etiqueta">
           <p class="sobrelinea">Método</p>
@@ -489,9 +430,7 @@ const respuestasAportaciones = [
 
             <p>
               Cada aportación puede ayudar a mejorar un ensayo, abrir una nueva
-              línea de investigación o corregir un argumento. Algunas de ellas
-              podrán dar lugar a una respuesta pública, sin reproducir el mensaje
-              recibido ni identificar a quien lo haya enviado.
+              línea de investigación o corregir un argumento.
             </p>
           </div>
 
@@ -1024,93 +963,6 @@ const respuestasAportaciones = [
     font-size: 1.05rem;
   }
 
-  /* ==========================
-     Respuestas a aportaciones
-     ========================== */
-
-  .respuestas-aportaciones {
-    position: relative;
-  }
-
-  .lista-respuestas {
-    border-top: 1px solid var(--linea);
-  }
-
-  .respuesta-aportacion {
-    padding: 48px 0 64px;
-    display: grid;
-    grid-template-columns: 180px minmax(0, 1fr);
-    gap: 70px;
-    border-bottom: 1px solid var(--linea);
-  }
-
-  .respuesta-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .respuesta-numero {
-    margin: 0;
-    color: var(--acento);
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.8rem;
-  }
-
-  .respuesta-fecha {
-    margin: 0;
-    color: var(--suave);
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .respuesta-contenido {
-    max-width: 850px;
-  }
-
-  .respuesta-origen {
-    margin: 0 0 18px;
-    color: var(--suave);
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .respuesta-origen span {
-    display: block;
-    margin-top: 6px;
-    color: var(--tinta);
-    text-transform: none;
-    letter-spacing: 0;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1rem;
-    font-weight: normal;
-  }
-
-  .respuesta-aportacion h3 {
-    margin: 0 0 36px;
-    font-size: clamp(2.2rem, 4vw, 4rem);
-    letter-spacing: -0.04em;
-  }
-
-  .respuesta-texto {
-    max-width: 760px;
-  }
-
-  .respuesta-texto p {
-    margin: 0 0 24px;
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 1.12rem;
-    line-height: 1.7;
-  }
-
-  .respuesta-texto p:last-child {
-    margin-bottom: 0;
-  }
-
   .manifiesto {
     display: grid;
     grid-template-columns: 1fr 3fr;
@@ -1225,11 +1077,6 @@ const respuestasAportaciones = [
       padding: 50px 0 70px;
     }
 
-    .respuesta-aportacion {
-      grid-template-columns: 120px minmax(0, 1fr);
-      gap: 35px;
-    }
-
     .hero-inferior,
     .cabecera-seccion,
     .manifiesto,
@@ -1277,17 +1124,6 @@ const respuestasAportaciones = [
   }
 
   @media (max-width: 560px) {
-    .respuesta-aportacion {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
-
-    .respuesta-meta {
-      flex-direction: row;
-      align-items: baseline;
-      justify-content: space-between;
-    }
-
     .cabecera,
     main,
     footer {
