@@ -1,0 +1,19 @@
+PANEL DE MODERACIÓN — FILOSOFÍZATE
+
+1. Descomprime este ZIP en la raíz del proyecto C:\Users\vicen\filosofizate.
+2. El único archivo nuevo es src/pages/administracion/foro.astro.
+3. No reemplaza ni modifica la portada, la API ni la base de datos.
+4. Ejecuta npm run build.
+5. Ejecuta npx wrangler dev --config dist/server/wrangler.json.
+6. Abre http://127.0.0.1:8787/administracion/foro/.
+7. Introduce ADMIN_TOKEN y pulsa «Ver pendientes».
+8. Aprueba o rechaza cada intervención. La lista se actualiza automáticamente.
+
+IMPORTANTE:
+- El panel utiliza la API /api/foro/moderacion que ya tienes instalada.
+- El servidor comprueba ADMIN_TOKEN en cada solicitud. El panel no almacena la clave en localStorage ni cookies.
+- El panel no es una sesión de administración completa; quien conozca la URL puede ver el formulario de acceso, pero no los datos sin el token.
+- Para producción, configura ADMIN_TOKEN como secreto de Cloudflare, nunca en Git.
+- Protege .dev.vars y dist/server/.dev.vars mediante .gitignore.
+- Si el token se ha compartido en una conversación, cámbialo también en los entornos donde esté en uso.
+- No publiques el foro para usuarios reales hasta añadir medidas antispam y límites de frecuencia.

@@ -1,0 +1,18 @@
+---
+const { espacio = '', tema = '', conversacionId = 0, tipo = 'conversacion' } = Astro.props;
+---
+<form class="formulario" data-foro method="post" action={tipo === 'mensaje' ? '/api/foro/mensajes' : '/api/foro/conversaciones'}>
+<h2>{tipo === 'mensaje' ? 'Responder' : 'Abrir una conversación'}</h2>
+<p class="muted">Sin registro. Seudónimo opcional. Los mensajes se publican después de la moderación.</p>
+<input type="hidden" name="espacio" value={espacio}/><input type="hidden" name="tema" value={tema}/><input type="hidden" name="conversacion_id" value={conversacionId}/>
+<div style="position:absolute;left:-10000px" aria-hidden="true"><label>Web<input name="web" tabindex="-1" autocomplete="off"/></label></div>
+<label for="foro-autor">Nombre o seudónimo (opcional)</label><input id="foro-autor" name="autor" maxlength="80"/>
+{tipo !== 'mensaje' && <><label for="foro-titulo">Título de la conversación</label><input id="foro-titulo" name="titulo" required minlength="5" maxlength="160"/></>}
+<label for="foro-contenido">Tu aportación</label><textarea id="foro-contenido" name="contenido" required minlength="10" maxlength="10000"></textarea>
+<label class="aceptacion"><input type="checkbox" name="licencia" value="si" required/><span>Confirmo que puedo compartir este texto y acepto publicarlo bajo <a href="/licencia/">CC BY-SA 4.0</a> si es aprobado. No incluyo material ajeno sin permiso.</span></label>
+<p class="muted">Norma de convivencia: respeto a las personas, libertad para discutir las ideas. <a href="/licencia/">Normas y licencia</a>.</p>
+<button type="submit">Enviar para moderación →</button><p data-estado role="status" aria-live="polite"></p>
+</form>
+<script>
+ document.querySelectorAll<HTMLFormElement>('form[data-foro]').forEach(form => form.addEventListener('submit',async e=>{e.preventDefault();const estado=form.querySelector<HTMLElement>('[data-estado]');const boton=form.querySelector<HTMLButtonElement>('button');if(!estado||!boton)return;boton.disabled=true;estado.textContent='Enviando…';try{const res=await fetch(form.action,{method:'POST',body:new FormData(form)});const data=await res.json();if(!res.ok)throw new Error(data.error||'No se pudo enviar.');estado.textContent='Gracias. Tu intervención queda pendiente de moderación.';form.reset()}catch(err){estado.textContent=err instanceof Error?err.message:'Error de envío'}finally{boton.disabled=false}}));
+</script>

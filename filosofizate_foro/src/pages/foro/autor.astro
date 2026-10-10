@@ -1,0 +1,8 @@
+---
+import ForoLayout from '../../layouts/ForoLayout.astro';
+import ForoFormulario from '../../components/ForoFormulario.astro';
+import { DB, type Conversacion } from '../../lib/foro';
+export const prerender = false;
+const conversaciones = await DB().prepare("SELECT id,titulo,autor,creada FROM foro_conversaciones WHERE espacio=? AND estado='publicado' ORDER BY creada DESC LIMIT 100").bind('autor').all<Conversacion>();
+---
+<ForoLayout titulo="Conversaciones con el autor"><p class="kicker"><a href="/foro/">← Foro</a></p><h1>Conversaciones con el autor</h1><p class="intro">Objeciones, preguntas y propuestas dirigidas al autor del proyecto.</p><section class="linea"><h2>Conversaciones</h2>{conversaciones.results.length===0?<p>Aún no hay conversaciones publicadas.</p>:conversaciones.results.map(c=><article class="tarjeta"><h3><a href={`/foro/conversacion/${c.id}/`}>{c.titulo}</a></h3><p class="muted">{c.autor} · {c.creada.slice(0,10)}</p></article>)}</section><ForoFormulario espacio="autor" /></ForoLayout>

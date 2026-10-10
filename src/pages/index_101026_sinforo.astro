@@ -214,10 +214,9 @@ const debateAbierto = {
 
       <nav aria-label="Navegación principal">
         <a href="#ensayos">Ensayos</a>
-        <a href="/foro/">Foro</a>
+        <a href="#debate">Debate</a>
         <a href="#conceptos">Conceptos</a>
         <a href="#proyecto">Proyecto</a>
-        <a href="/administracion/foro/">Moderación</a>
       </nav>
     </header>
 
@@ -253,8 +252,8 @@ const debateAbierto = {
               <span aria-hidden="true">↘</span>
             </a>
 
-            <a class="enlace-aportaciones" href="/foro/">
-              Entrar en el foro
+            <a class="enlace-aportaciones" href="/aportaciones/">
+              Sobre aportaciones
               <span aria-hidden="true">→</span>
             </a>
           </div>
@@ -291,7 +290,7 @@ const debateAbierto = {
 
                 <div class="ensayo-contenido">
                   <div class="temas">
-                    {ensayo.temas.map((tema) => <a href={`/foro/tema/${encodeURIComponent(tema)}/`}>{tema}</a>)}
+                    {ensayo.temas.map((tema) => <span>{tema}</span>)}
                   </div>
 
                   <h3>
@@ -319,8 +318,8 @@ const debateAbierto = {
       <section class="seccion debate-abierto" id="debate">
         <header class="cabecera-seccion debate-cabecera">
           <div>
-            <p class="sobrelinea">Foro abierto</p>
-            <h2>La reflexión continúa en la conversación.</h2>
+            <p class="sobrelinea">Debate abierto</p>
+            <h2>La reflexión continúa en el lector.</h2>
           </div>
 
           <p class="nota-seccion">
@@ -332,7 +331,7 @@ const debateAbierto = {
         <article class="tarjeta-debate">
           <div class="debate-contenido">
             <div class="temas">
-              {debateAbierto.temas.map((tema) => <a href={`/foro/tema/${encodeURIComponent(tema)}/`}>{tema}</a>)}
+              {debateAbierto.temas.map((tema) => <span>{tema}</span>)}
             </div>
 
             <p class="debate-marca">Pregunta abierta</p>
@@ -346,7 +345,7 @@ const debateAbierto = {
             </p>
 
             <a class="boton debate-boton" href={debateAbierto.enlace}>
-              Leer el debate destacado
+              Entrar en el debate
               <span aria-hidden="true">→</span>
             </a>
           </div>
@@ -356,7 +355,6 @@ const debateAbierto = {
             de registro.
           </p>
         </article>
-        <p style="margin-top:24px"><a class="boton" href="/foro/">Explorar todos los foros <span aria-hidden="true">→</span></a></p>
       </section>
 
       <section class="seccion manifiesto" id="conceptos">
@@ -523,7 +521,7 @@ const debateAbierto = {
 
       <div>
         <p>Ensayos filosóficos en construcción.</p>
-        <p>🄯 {new Date().getFullYear()} Vicente Domínguez Arca · <a href="/licencia/">Textos abiertos · CC BY-SA 4.0</a></p>
+        <p>🄯 {new Date().getFullYear()} Vicente Domínguez Arca</p>
       </div>
     </footer>
   </body>
@@ -895,9 +893,7 @@ const debateAbierto = {
     gap: 8px;
   }
 
-  .temas span,
-  .temas a {
-    text-decoration: none;
+  .temas span {
     padding: 4px 8px;
     border: 1px solid var(--linea);
     font-size: 0.62rem;

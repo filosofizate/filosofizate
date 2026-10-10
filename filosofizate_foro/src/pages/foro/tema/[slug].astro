@@ -1,0 +1,22 @@
+---
+import ForoLayout from '../../../layouts/ForoLayout.astro';
+import ForoFormulario from '../../../components/ForoFormulario.astro';
+import { DB, validoTema, type Conversacion } from '../../../lib/foro';
+export const prerender = false;
+const tema = decodeURIComponent(Astro.params.slug ?? '');
+if (!validoTema(tema)) return Astro.redirect('/foro/');
+const conversaciones = await DB().prepare("SELECT id,titulo,autor,creada FROM foro_conversaciones WHERE espacio='tema' AND tema=? AND estado='publicado' ORDER BY creada DESC LIMIT 100").bind(tema).all<Conversacion>();
+// Se conservan los enlaces del catálogo actual de la portada.
+const catalogo = [
+['Deuda','/ensayos/de-la-deuda-de-la-reciprocidad-y-de-sus-tensiones','De la deuda, de la reciprocidad y de sus tensiones'],
+['Propiedad','/ensayos/propiedad','De lo aparentemente inevitable: la propiedad'],
+['Desigualdad','/ensayos/soberania','De lo soberano, de lo subyacente, de lo desigual'],
+['Desigualdad','/ensayos/frontera-ambivalencia-insurreccion','De la frontera, de la ambivalencia y de la insurrección'],
+['Desigualdad','/ensayos/profunda-desigualdad','De la profunda desigualdad'],
+['Desigualdad','/ensayos/separacion-clases','De la separación y de las clases'],
+['Clases','/ensayos/separacion-clases','De la separación y de las clases'],
+['Separación','/ensayos/separacion-clases','De la separación y de las clases']
+];
+const ensayos = catalogo.filter(e=>e[0]===tema);
+---
+<ForoLayout titulo={`Foro: ${tema}`}><p class="kicker"><a href="/foro/">← Foro</a> / Conceptos</p><h1>{tema}.</h1><p class="intro">Ensayos y conversaciones alrededor de este concepto.</p><section class="linea"><h2>Ensayos relacionados</h2>{ensayos.length===0?<p class="muted">Consulta también las etiquetas de los ensayos para descubrir relaciones con este concepto.</p>:ensayos.map(e=><p><a href={e[1]}>{e[2]} ↗</a></p>)}</section><section class="linea"><h2>Conversaciones</h2>{conversaciones.results.length===0?<p>Aún no hay conversaciones publicadas.</p>:conversaciones.results.map(c=><article class="tarjeta"><h3><a href={`/foro/conversacion/${c.id}/`}>{c.titulo}</a></h3><p class="muted">{c.autor} · {c.creada.slice(0,10)}</p></article>)}</section><ForoFormulario espacio="tema" tema={tema}/></ForoLayout>

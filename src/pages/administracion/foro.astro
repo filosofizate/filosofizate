@@ -1,0 +1,152 @@
+---
+export const prerender = false;
+---
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex,nofollow,noarchive" />
+  <title>Moderación del foro | FilosofíZate</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color-scheme: light; background: #f7f6f2; color: #252525; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { max-width: 900px; margin: 0 auto; padding: 36px 18px 70px; }
+    h1 { font-family: Georgia, serif; font-size: clamp(1.9rem, 5vw, 2.7rem); margin: 0 0 10px; }
+    h2 { font-family: Georgia, serif; margin-top: 32px; }
+    p { line-height: 1.65; }
+    .sub { color: #565656; }
+    .panel, article { background: white; border: 1px solid #ddd8cc; border-radius: 12px; padding: 22px; margin-top: 18px; }
+    label { display: block; font-weight: 600; margin-bottom: 8px; }
+    input { width: 100%; padding: 12px; font: inherit; border: 1px solid #aaa; border-radius: 7px; }
+    button { cursor: pointer; font: inherit; padding: 10px 15px; border-radius: 7px; border: 1px solid #49463e; background: #292820; color: white; }
+    button.secondary { background: white; color: #292820; }
+    button.danger { background: #8c3030; border-color: #8c3030; }
+    button:disabled { opacity: .55; cursor: wait; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 15px; }
+    .meta { color: #666; font-size: .9rem; overflow-wrap: anywhere; }
+    .body { white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.65; }
+    .status { min-height: 1.5em; }
+    .error { color: #a11e1e; }
+    .empty { color: #555; font-style: italic; }
+    a { color: #51472b; }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <main>
+    <p><a href="/foro/">← Volver al foro</a></p>
+    <h1>Moderación del foro</h1>
+    <p class="sub">Revisa las conversaciones y respuestas antes de publicarlas. La clave se conserva solo en esta pestaña, en memoria, y no se guarda en el navegador.</p>
+    <section class="panel" aria-label="Acceso a la moderación">
+      <form id="acceso">
+        <label for="token">Clave ADMIN_TOKEN</label>
+        <input id="token" type="password" autocomplete="off" required spellcheck="false" />
+        <div class="actions"><button type="submit">Ver pendientes</button><button class="secondary" type="button" id="salir">Cerrar sesión de esta pestaña</button></div>
+      </form>
+      <p id="estado" class="status" role="status" aria-live="polite"></p>
+    </section>
+    <section id="resultados" hidden>
+      <div class="actions"><button class="secondary" id="actualizar" type="button">Actualizar pendientes</button></div>
+      <h2>Conversaciones pendientes <span id="num-conversaciones"></span></h2>
+      <div id="conversaciones"></div>
+      <h2>Respuestas pendientes <span id="num-mensajes"></span></h2>
+      <div id="mensajes"></div>
+    </section>
+  </main>
+  <script is:inline>
+    (() => {
+      const endpoint = '/api/foro/moderacion';
+      const $ = id => document.getElementById(id);
+      let token = '';
+      const estado = (texto, error = false) => { $('estado').textContent = texto; $('estado').classList.toggle('error', error); };
+      const nodo = (etiqueta, clase, contenido) => {
+        const e = document.createElement(etiqueta);
+        if (clase) e.className = clase;
+        if (contenido !== undefined && contenido !== null) e.textContent = String(contenido);
+        return e;
+      };
+      async function peticion(opciones = {}) {
+        const respuesta = await fetch(endpoint, {
+          ...opciones,
+          headers: { Authorization: `Bearer ${token}`, ...(opciones.headers || {}) },
+          cache: 'no-store'
+        });
+        if (!respuesta.ok) {
+          if (respuesta.status === 401) throw new Error('Clave incorrecta o ADMIN_TOKEN no configurado en el servidor.');
+          throw new Error(`Error del servidor (${respuesta.status}).`);
+        }
+        return respuesta.json();
+      }
+      function mostrar(lista, destino, tipo) {
+        destino.replaceChildren();
+        if (!Array.isArray(lista) || lista.length === 0) {
+          destino.append(nodo('p', 'empty', 'No hay intervenciones pendientes.'));
+          return;
+        }
+        for (const item of lista) {
+          const articulo = nodo('article');
+          const titulo = item.titulo || (tipo === 'mensaje' ? `Respuesta a la conversación ${item.conversacion_id ?? ''}` : 'Conversación sin título');
+          articulo.append(nodo('h3', '', titulo));
+          articulo.append(nodo('p', 'meta', `ID: ${item.id} · Autor: ${item.autor || item.nombre || 'Anónimo'} · Fecha: ${item.creada || 'Sin fecha'}`));
+          if (tipo === 'conversacion' && item.espacio) articulo.append(nodo('p', 'meta', `Espacio: ${item.espacio}${item.tema ? ' · Tema: ' + item.tema : ''}`));
+          articulo.append(nodo('p', 'body', item.contenido || item.texto || item.cuerpo || 'Sin contenido visible'));
+          const acciones = nodo('div', 'actions');
+          for (const [accion, etiqueta, clase] of [['publicar', 'Aprobar', ''], ['rechazar', 'Rechazar', 'danger']]) {
+            const boton = nodo('button', clase, etiqueta);
+            boton.type = 'button';
+            boton.addEventListener('click', async () => {
+              if (accion === 'rechazar' && !confirm('¿Rechazar esta intervención?')) return;
+              for (const b of acciones.querySelectorAll('button')) b.disabled = true;
+              estado('Guardando decisión…');
+              try {
+                await peticion({ method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ tipo, id: Number(item.id), accion }) });
+                estado(accion === 'publicar' ? 'Intervención aprobada.' : 'Intervención rechazada.');
+                await cargar(true);
+              } catch (error) {
+                estado(error.message, true);
+                for (const b of acciones.querySelectorAll('button')) b.disabled = false;
+              }
+            });
+            acciones.append(boton);
+          }
+          articulo.append(acciones);
+          destino.append(articulo);
+        }
+      }
+      async function cargar(silencioso = false) {
+        if (!token) { estado('Introduce tu clave para continuar.', true); return; }
+        if (!silencioso) estado('Consultando intervenciones pendientes…');
+        try {
+          const datos = await peticion();
+          const conversaciones = datos.conversaciones || [];
+          const mensajes = datos.mensajes || [];
+          $('num-conversaciones').textContent = `(${conversaciones.length})`;
+          $('num-mensajes').textContent = `(${mensajes.length})`;
+          mostrar(conversaciones, $('conversaciones'), 'conversacion');
+          mostrar(mensajes, $('mensajes'), 'mensaje');
+          $('resultados').hidden = false;
+          if (!silencioso) estado('Pendientes actualizados.');
+        } catch (error) {
+          $('resultados').hidden = true;
+          estado(error.message, true);
+        }
+      }
+      $('acceso').addEventListener('submit', async e => {
+        e.preventDefault();
+        token = $('token').value;
+        $('token').value = '';
+        await cargar();
+      });
+      $('actualizar').addEventListener('click', () => cargar());
+      $('salir').addEventListener('click', () => {
+        token = '';
+        $('token').value = '';
+        $('resultados').hidden = true;
+        estado('Clave descartada de esta pestaña.');
+      });
+    })();
+  </script>
+</body>
+</html>

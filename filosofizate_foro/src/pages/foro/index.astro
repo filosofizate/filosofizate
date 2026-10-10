@@ -1,0 +1,11 @@
+---
+import ForoLayout from '../../layouts/ForoLayout.astro';
+import { temas, rutaTema, DB, type Conversacion } from '../../lib/foro';
+export const prerender = false;
+const ultimas = await DB().prepare("SELECT id, titulo, autor, creada, espacio, tema FROM foro_conversaciones WHERE estado='publicado' ORDER BY creada DESC LIMIT 12").all<Conversacion>();
+---
+<ForoLayout titulo="Foro abierto"><p class="kicker">Pensamiento compartido</p><h1>Foro abierto.</h1><p class="intro">Un lugar para discutir conceptos, objetar argumentos y continuar las preguntas. Sin registro, moderado por el autor y con el respeto común como única exigencia de convivencia.</p>
+<section class="linea"><h2>Espacios de conversación</h2><div class="tarjeta"><h3><a href="/foro/general/">Foro general ↗</a></h3><p>Conversaciones sin un concepto o ensayo predeterminado.</p></div><div class="tarjeta"><h3><a href="/foro/autor/">Conversaciones con el autor ↗</a></h3><p>Preguntas, objeciones y propuestas dirigidas al autor del proyecto. Las respuestas no están garantizadas.</p></div></section>
+<section class="linea"><h2>Foros por concepto</h2><p class="muted">Las etiquetas conectan ensayos y conversaciones.</p><div class="etiquetas">{temas.map(t=><a class="etiqueta" href={rutaTema(t)}>{t} ↗</a>)}</div></section>
+<section class="linea"><h2>Conversaciones recientes</h2>{ultimas.results.length===0?<p>Todavía no hay conversaciones publicadas. Puedes abrir la primera.</p>:ultimas.results.map(c=><article class="tarjeta"><p class="kicker">{c.espacio === 'tema' ? c.tema : c.espacio}</p><h3><a href={`/foro/conversacion/${c.id}/`}>{c.titulo}</a></h3><p class="muted">{c.autor} · {c.creada.slice(0,10)}</p></article>)}</section>
+<p><a href="/licencia/">Sobre la libertad de los textos, las normas y la licencia →</a></p></ForoLayout>

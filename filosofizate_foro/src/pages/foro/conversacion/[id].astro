@@ -1,0 +1,12 @@
+---
+import ForoLayout from '../../../layouts/ForoLayout.astro';
+import ForoFormulario from '../../../components/ForoFormulario.astro';
+import { DB, type Conversacion, type Mensaje } from '../../../lib/foro';
+export const prerender = false;
+const id = Number(Astro.params.id);
+if (!Number.isSafeInteger(id) || id <= 0) return Astro.redirect('/foro/');
+const conversacion = await DB().prepare("SELECT * FROM foro_conversaciones WHERE id=? AND estado='publicado'").bind(id).first<Conversacion>();
+if (!conversacion) return Astro.redirect('/foro/');
+const mensajes = await DB().prepare("SELECT * FROM foro_mensajes WHERE conversacion_id=? AND estado='publicado' ORDER BY creada ASC").bind(id).all<Mensaje>();
+---
+<ForoLayout titulo={conversacion.titulo}><p class="kicker"><a href="/foro/">← Foro</a> / {conversacion.tema || conversacion.espacio}</p><h1>{conversacion.titulo}</h1><p class="muted">{conversacion.autor} · {conversacion.creada.slice(0,10)}</p><p class="intro mensaje">{conversacion.contenido}</p><section class="linea"><h2>Respuestas</h2>{mensajes.results.length===0?<p>Aún no hay respuestas publicadas.</p>:mensajes.results.map(m=><article class="respuesta"><p class="muted">{m.autor} · {m.creada.slice(0,10)}</p><p class="mensaje">{m.contenido}</p></article>)}</section><ForoFormulario tipo="mensaje" conversacionId={id}/></ForoLayout>
