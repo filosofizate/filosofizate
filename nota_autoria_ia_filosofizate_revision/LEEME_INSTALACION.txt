@@ -1,0 +1,22 @@
+INSTALACIÓN — AUTORÍA E IA (FilosofíZate)
+
+1. Haz una copia de seguridad de tu proyecto.
+2. Descomprime este ZIP en C:\Users\vicen\filosofizate, conservando las carpetas.
+   Se añade src/pages/autoria-ia/index.astro; no se sustituye index.astro.
+   Esta página utiliza src/layouts/ForoLayout.astro, que ya existe con el foro.
+3. Abre src/pages/index.astro. En la navegación principal busca:
+      <a href="#proyecto">Proyecto</a>
+   Y justo debajo añade:
+      <a href="/autoria-ia/">Autoría e IA</a>
+   IMPORTANTE: usa la barra inicial / para que el enlace funcione desde cualquier página.
+4. Comprueba con npm run build.
+5. Ejecuta tu servidor local habitual y abre /autoria-ia/.
+6. Cuando esté correcto, publica mediante tu flujo habitual de git.
+
+El texto editable también se incluye en NOTA_AUTORIA_IA.md. Si modificas ese
+archivo .md, la página .astro NO se actualiza automáticamente; para cambiar
+lo publicado debes editar el contenido de src/pages/autoria-ia/index.astro.
+
+La página conserva expresamente la posición filosófica del autor sobre
+la inferencia y la generalización, sin presentarla como terminología
+universalmente aceptada.
