@@ -1,0 +1,100 @@
+
+---
+const titulo = "De la mayoría";
+const videoId = "xbudiR2ezPA";
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      name="description"
+      content="De la mayoría — FilosofíZate."
+    />
+    <title>{titulo} | FilosofíZate</title>
+  </head>
+
+  <body>
+    <main class="pagina">
+      <a class="volver" href="/">
+        ← FilosofíZate
+      </a>
+
+      <p class="numero">ENSAYO 22</p>
+
+      <h1>{titulo}</h1>
+
+      <div class="video">
+        <iframe
+          src={`https://www.youtube-nocookie.com/embed/${videoId}`}
+          title={titulo}
+          loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </main>
+  </body>
+</html>
+
+<style>
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  :global(body) {
+    margin: 0;
+    background: #eee9df;
+    color: #171917;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .pagina {
+    width: min(1050px, calc(100% - 36px));
+    margin: 0 auto;
+    padding: 45px 0 100px;
+  }
+
+  .volver {
+    color: inherit;
+    font-size: 0.8rem;
+    text-decoration: none;
+  }
+
+  .numero {
+    margin-top: 85px;
+    color: #9f3f25;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.15em;
+  }
+
+  h1 {
+    margin: 20px 0 50px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: normal;
+    letter-spacing: -0.055em;
+  }
+
+  .video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #171917;
+  }
+
+  iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+</style>
